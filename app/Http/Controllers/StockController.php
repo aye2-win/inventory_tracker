@@ -12,7 +12,14 @@ class StockController extends Controller
     {
         $products = Product::orderBy('name')->get();
 
-        return view('stock.index', compact('products'));
+        $movements = StockMovement::with('product')
+            ->latest()
+            ->get();
+
+        return view('stocks.index', compact(
+            'products',
+            'movements'
+            ));
     }
 
     public function store(Request $request)
