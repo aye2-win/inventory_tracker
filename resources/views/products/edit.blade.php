@@ -4,10 +4,12 @@
 
 @section('content')
 
+<!-- page header -->
 <div class="d-flex justify-content-between align-items-center mb-4">
 
     <h2>Edit Product</h2>
 
+    <!-- go back to products page -->
     <a
         href="{{ route('products.index') }}"
         class="btn btn-secondary"
@@ -17,10 +19,12 @@
 
 </div>
 
+<!-- product edit form card -->
 <div class="card shadow-sm">
 
     <div class="card-body">
 
+        <!-- edit product form -->
         <form
             action="{{ route('products.update', $product) }}"
             method="POST"
@@ -31,6 +35,7 @@
 
             <div class="row">
 
+                <!-- product name -->
                 <div class="col-md-6 mb-3">
 
                     <label class="form-label">
@@ -47,6 +52,7 @@
 
                 </div>
 
+                <!-- product sku -->
                 <div class="col-md-6 mb-3">
 
                     <label class="form-label">
@@ -63,6 +69,7 @@
 
                 </div>
 
+                <!-- select product category -->
                 <div class="col-md-6 mb-3">
 
                     <label class="form-label">
@@ -95,6 +102,7 @@
 
                 </div>
 
+                <!-- select product supplier -->
                 <div class="col-md-6 mb-3">
 
                     <label class="form-label">
@@ -127,6 +135,7 @@
 
                 </div>
 
+                <!-- purchase price -->
                 <div class="col-md-4 mb-3">
 
                     <label class="form-label">
@@ -148,6 +157,7 @@
 
                 </div>
 
+                <!-- selling price -->
                 <div class="col-md-4 mb-3">
 
                     <label class="form-label">
@@ -169,6 +179,7 @@
 
                 </div>
 
+                <!-- product quantity -->
                 <div class="col-md-4 mb-3">
 
                     <label class="form-label">
@@ -189,6 +200,7 @@
 
                 </div>
 
+                <!-- reorder level -->
                 <div class="col-md-4 mb-3">
 
                     <label class="form-label">
@@ -209,6 +221,7 @@
 
                 </div>
 
+                <!-- product description -->
                 <div class="col-12 mb-3">
 
                     <label class="form-label">
@@ -228,6 +241,7 @@
 
             </div>
 
+            <!-- update product -->
             <button
                 type="submit"
                 class="btn btn-primary"

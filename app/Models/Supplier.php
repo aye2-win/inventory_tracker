@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Supplier extends Model
 {
+    // allow these fields to be saved
     protected $fillable = [
         'name',
         'email',
@@ -14,6 +15,7 @@ class Supplier extends Model
         'address',
     ];
 
+    // get all products from this supplier
     public function products(): HasMany
     {
         return $this->hasMany(Product::class);

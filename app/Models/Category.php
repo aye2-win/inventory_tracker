@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Category extends Model
 {
+    // allow these fields to be saved
     protected $fillable = [
         'name',
         'description',
     ];
 
+    // get all products in this category
     public function products(): HasMany
     {
         return $this->hasMany(Product::class);

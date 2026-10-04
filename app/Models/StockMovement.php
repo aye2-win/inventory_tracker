@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class StockMovement extends Model
 {
+    // allow these fields to be saved
     protected $fillable = [
         'product_id',
         'type',
@@ -14,6 +15,7 @@ class StockMovement extends Model
         'note',
     ];
 
+    // get the product related to this stock movement
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);

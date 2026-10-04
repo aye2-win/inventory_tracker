@@ -4,129 +4,167 @@
 
 @section('content')
 
-<div class="d-flex justify-content-between align-items-center mb-4">
+<div class="container-fluid px-0">
 
-    <h2>Product Details</h2>
+    {{-- header --}}
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-    <div>
+        <div>
+            <h2 class="mb-1">{{ $product->name }}</h2>
+        </div>
 
-        <a
-            href="{{ route('products.edit', $product) }}"
-            class="btn btn-warning"
-        >
-            Edit
-        </a>
+        <div class="d-flex gap-2">
+            <a
+                href="{{ route('products.edit', $product) }}"
+                class="btn btn-warning"
+            >
+                Edit
+            </a>
 
-        <a
-            href="{{ route('products.index') }}"
-            class="btn btn-secondary"
-        >
-            Back
-        </a>
+            <a
+                href="{{ route('products.index') }}"
+                class="btn btn-outline-secondary"
+            >
+                Back
+            </a>
+        </div>
 
     </div>
 
-</div>
 
-<div class="card shadow-sm">
+    {{-- product information --}}
+    <div class="card border-0 shadow-sm">
 
-    <div class="card-body">
+        <div class="card-body p-4">
 
-        <div class="row">
+            {{-- basic information --}}
+            <div class="mb-5">
 
-            <div class="col-md-6 mb-3">
+                <h6 class="text-uppercase text-muted fw-semibold mb-4">
+                    Product Information
+                </h6>
 
-                <strong>Name</strong>
+                <div class="row g-4">
 
-                <p>
-                    {{ $product->name }}
-                </p>
+                    <div class="col-md-6">
+                        <div class="small text-muted mb-1">
+                            Product Name
+                        </div>
 
-            </div>
+                        <div class="fw-semibold">
+                            {{ $product->name }}
+                        </div>
+                    </div>
 
-            <div class="col-md-6 mb-3">
+                    <div class="col-md-6">
+                        <div class="small text-muted mb-1">
+                            SKU
+                        </div>
 
-                <strong>SKU</strong>
+                        <div class="fw-semibold">
+                            {{ $product->sku }}
+                        </div>
+                    </div>
 
-                <p>
-                    {{ $product->sku }}
-                </p>
+                    <div class="col-md-6">
+                        <div class="small text-muted mb-1">
+                            Category
+                        </div>
 
-            </div>
+                        <div class="fw-semibold">
+                            {{ $product->category->name }}
+                        </div>
+                    </div>
 
-            <div class="col-md-6 mb-3">
+                    <div class="col-md-6">
+                        <div class="small text-muted mb-1">
+                            Supplier
+                        </div>
 
-                <strong>Category</strong>
+                        <div class="fw-semibold">
+                            {{ $product->supplier->name }}
+                        </div>
+                    </div>
 
-                <p>
-                    {{ $product->category->name }}
-                </p>
-
-            </div>
-
-            <div class="col-md-6 mb-3">
-
-                <strong>Supplier</strong>
-
-                <p>
-                    {{ $product->supplier->name }}
-                </p>
-
-            </div>
-
-            <div class="col-md-4 mb-3">
-
-                <strong>Purchase Price</strong>
-
-                <p>
-                    ${{ number_format(
-                        $product->purchase_price,
-                        2
-                    ) }}
-                </p>
+                </div>
 
             </div>
 
-            <div class="col-md-4 mb-3">
 
-                <strong>Selling Price</strong>
+            {{-- pricing and inventory --}}
+            <div class="border-top pt-4 mb-5">
 
-                <p>
-                    ${{ number_format(
-                        $product->selling_price,
-                        2
-                    ) }}
-                </p>
+                <h6 class="text-uppercase text-muted fw-semibold mb-4">
+                    Pricing & Inventory
+                </h6>
+
+                <div class="row g-4">
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="small text-muted mb-1">
+                            Purchase Price
+                        </div>
+
+                        <div class="fs-5 fw-semibold">
+                            ${{ number_format($product->purchase_price, 2) }}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="small text-muted mb-1">
+                            Selling Price
+                        </div>
+
+                        <div class="fs-5 fw-semibold">
+                            ${{ number_format($product->selling_price, 2) }}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="small text-muted mb-1">
+                            Current Stock
+                        </div>
+
+                        <div class="fs-5 fw-semibold">
+                            {{ $product->quantity }}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="small text-muted mb-1">
+                            Reorder Level
+                        </div>
+
+                        <div class="fs-5 fw-semibold">
+                            {{ $product->reorder_level }}
+                        </div>
+                    </div>
+
+                </div>
 
             </div>
 
-            <div class="col-md-4 mb-3">
 
-                <strong>Quantity</strong>
+            {{-- description --}}
+            <div class="border-top pt-4">
 
-                <p>
-                    {{ $product->quantity }}
-                </p>
+                <h6 class="text-uppercase text-muted fw-semibold mb-3">
+                    Description
+                </h6>
 
-            </div>
+                @if($product->description)
 
-            <div class="col-md-4 mb-3">
+                    <p class="text-muted mb-0">
+                        {{ $product->description }}
+                    </p>
 
-                <strong>Reorder Level</strong>
+                @else
 
-                <p>
-                    {{ $product->reorder_level }}
-                </p>
+                    <p class="text-muted fst-italic mb-0">
+                        No description available.
+                    </p>
 
-            </div>
-
-            <div class="col-12">
-
-                <strong>Description</strong>
-
-                <p>
-                    {{ $product->description ?: 'No description.' }}
-                </p>
+                @endif
 
             </div>
 

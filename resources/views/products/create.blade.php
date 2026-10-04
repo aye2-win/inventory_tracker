@@ -4,22 +4,27 @@
 
 @section('content')
 
+<!-- page header -->
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h2>Add Product</h2>
 
+    <!-- go back to products page -->
     <a href="{{ route('products.index') }}" class="btn btn-secondary">
         Back
     </a>
 </div>
 
+<!-- product form card -->
 <div class="card shadow-sm">
     <div class="card-body">
 
+        <!-- add product form -->
         <form action="{{ route('products.store') }}" method="POST">
             @csrf
 
             <div class="row">
 
+                <!-- product name -->
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Name</label>
                     <input
@@ -31,6 +36,7 @@
                     >
                 </div>
 
+                <!-- product sku -->
                 <div class="col-md-6 mb-3">
                     <label class="form-label">SKU</label>
                     <input
@@ -42,6 +48,7 @@
                     >
                 </div>
 
+                <!-- select product category -->
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Category</label>
 
@@ -59,6 +66,7 @@
                     </select>
                 </div>
 
+                <!-- select product supplier -->
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Supplier</label>
 
@@ -76,6 +84,7 @@
                     </select>
                 </div>
 
+                <!-- purchase price -->
                 <div class="col-md-4 mb-3">
                     <label class="form-label">Purchase Price</label>
 
@@ -89,6 +98,7 @@
                     >
                 </div>
 
+                <!-- selling price -->
                 <div class="col-md-4 mb-3">
                     <label class="form-label">Selling Price</label>
 
@@ -102,6 +112,7 @@
                     >
                 </div>
 
+                <!-- product quantity -->
                 <div class="col-md-4 mb-3">
                     <label class="form-label">Quantity</label>
 
@@ -115,6 +126,7 @@
                     >
                 </div>
 
+                <!-- reorder level -->
                 <div class="col-md-4 mb-3">
                     <label class="form-label">Reorder Level</label>
 
@@ -128,6 +140,7 @@
                     >
                 </div>
 
+                <!-- product description -->
                 <div class="col-12 mb-3">
                     <label class="form-label">Description</label>
 
@@ -140,6 +153,7 @@
 
             </div>
 
+            <!-- save product -->
             <button type="submit" class="btn btn-primary">
                 Save Product
             </button>

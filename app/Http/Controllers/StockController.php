@@ -8,10 +8,13 @@ use Illuminate\Http\Request;
 
 class StockController extends Controller
 {
+    // show products and stock movements
     public function index()
     {
+        // get all products
         $products = Product::orderBy('name')->get();
 
+        // get all stock movements with product details
         $movements = StockMovement::with('product')
             ->latest()
             ->get();
@@ -19,11 +22,13 @@ class StockController extends Controller
         return view('stocks.index', compact(
             'products',
             'movements'
-            ));
+        ));
     }
 
+    // store a new stock movement
     public function store(Request $request)
     {
+        // validate stock movement data
         $validated = $request->validate([
             'product_id' => 'required|exists:products,id',
             'type' => 'required|in:in,out',
@@ -31,8 +36,10 @@ class StockController extends Controller
             'note' => 'nullable|string',
         ]);
 
+        // find the selected product
         $product = Product::findOrFail($validated['product_id']);
 
+        // check if there is enough stock for stock out
         if (
             $validated['type'] === 'out' &&
             $product->quantity < $validated['quantity']
@@ -42,14 +49,18 @@ class StockController extends Controller
                 ->with('error', 'Not enough stock available.');
         }
 
+        // increase stock when type is in
         if ($validated['type'] === 'in') {
             $product->quantity += $validated['quantity'];
         } else {
+            // decrease stock when type is out
             $product->quantity -= $validated['quantity'];
         }
 
+        // save the updated stock quantity
         $product->save();
 
+        // create stock movement record
         StockMovement::create([
             'product_id' => $product->id,
             'type' => $validated['type'],
@@ -57,6 +68,7 @@ class StockController extends Controller
             'note' => $validated['note'] ?? null,
         ]);
 
+        // redirect to stock page
         return redirect()
             ->route('stock.index')
             ->with('success', 'Stock movement recorded successfully.');
